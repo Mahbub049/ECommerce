@@ -20,8 +20,10 @@ use App\Http\Controllers\AdminController;
 
 //backend routes
 
-Route::get('/admin',[AdminController::class, 'index']);
+Route::get('/admins',[AdminController::class, 'index']);
 Route::get('/dashboard',[AdminController::class, 'dashboard']);
+Route::post('//admin-dashboard',[AdminController::class, 'show_dashboard']);
+
 
 
 // Frontend route
