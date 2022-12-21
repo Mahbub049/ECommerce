@@ -28,26 +28,39 @@
             <table class="table table-striped table-bordered bootstrap-datatable datatable">
               <thead>
                   <tr>
-                      <th style="width: 5%">ID</th>
-                      <th style="width: 15%">Category Name</th>
-                      <th style="width: 30%">Description</th>
-                      <th style="width: 15%">Image</th>
-                      <th style="width: 15%">Status</th>
-                      <th style="width: 20%">Actions</th>
+                      <th style="width: 5%">Code</th>
+                      <th style="width: 10%">Product Name</th>
+                      <th style="width: 12%">Description</th>
+                      <th style="width: 5%">Price</th>
+                      <th style="width: 30%">Image</th>
+                      <th style="width: 5%">Cat Name</th>
+                      <th style="width: 5%">SubCat Name</th>
+                      <th style="width: 5%">Brand</th>
+                      <th style="width: 8%">Status</th>
+                      <th style="width: 15%">Actions</th>
                   </tr>
               </thead> 
               
-              @foreach ($categories as $category)
+              @foreach ($products as $product)
+              @php
+                  $product['image']=explode("|",$product->image);
+              @endphp
               <tbody>
                 <tr>
-                    <td>{{ $category->id }}</td>
-                    <td class="center">{{ $category->name }}</td>
-                    <td class="center">{{ $category->description }}</td>
+                    <td>{{ $product->code }}</td>
+                    <td class="center">{{ $product->name }}</td>
+                    <td class="center">{{ $product->description }}</td>
+                    <td class="center">&#2547;{{ $product->price }}</td>
                     <td>
-                        <img src="{{ asset('/category/'.$category->image) }}" style="widows: 150px; height: 80px;" alt="">
+                        @foreach ($product->image as $images)
+                        <img src="{{ asset('/image/'.$images) }}" style="width: 15%; height: 15%;" alt="">
+                        @endforeach
                     </td>
+                    <td class="center">{{ $product->category->name }}</td>
+                    <td class="center">{{ $product->subcategory->name }}</td>
+                    <td class="center">{{ $product->brand->name }}</td>
                     <td class="center">
-                    @if($category->status ==1)
+                    @if($product->status ==1)
                         <span class="label label-success">Active</span>
                     @else
                         <span class="label label-danger">Deactive</span>
@@ -57,24 +70,24 @@
                         <div class="span3">
 
                         </div>
-                        <div class="span2" >
-                            @if($category->status ==1)
-                        <a href="{{url('/cat-status'.$category->id)}}"class="btn btn-success" >
+                        <div class="span3" >
+                            @if($product->status ==1)
+                        <a href="{{url('/product-status'.$product->id)}}"class="btn btn-success" >
                             <i class="halflings-icon white thumbs-down"></i>  
                         </a>
                         @else
-                        <a href="{{url('/cat-status'.$category->id)}}" class="btn btn-danger" >
+                        <a href="{{url('/product-status'.$product->id)}}" class="btn btn-danger" >
                             <i class="halflings-icon white thumbs-up"></i>  
                         </a>
                         @endif
                         </div>
-                        <div class="span2">
-                            <a class="btn btn-info" href="{{url('/categories/'.$category->id.'/edit')}}">
+                        <div class="span3">
+                            <a class="btn btn-info" href="{{url('/products/'.$product->id.'/edit')}}">
                                 <i class="halflings-icon white edit"></i>  
                             </a>
                         </div>
-                        <div class="span2">
-                            <form action="{{url('/categories/'.$category->id)}}" method="POST">
+                        <div class="span3">
+                            <form action="{{url('/products/'.$product->id)}}" method="POST">
                                 @csrf
                                 @method('DELETE')
                         <button class="btn btn-danger" type="submit"><i class="halflings-icon white trash"></i></button>
