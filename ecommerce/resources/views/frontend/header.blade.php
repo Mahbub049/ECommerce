@@ -7,7 +7,7 @@
 						<li><a href="#"><i class="fa fa-map-marker"></i> 1734 Stonecoal Road</a></li>
 					</ul>
 					<ul class="header-links pull-right">
-						<li><a href="#"><i class="fa fa-dollar"></i> USD</a></li>
+						<li><a href="#">&#2547; BDT</a></li>
 						<li><a href="#"><i class="fa fa-user-o"></i> My Account</a></li>
 					</ul>
 				</div>
@@ -23,7 +23,7 @@
 						<!-- LOGO -->
 						<div class="col-md-3">
 							<div class="header-logo">
-								<a href="#" class="logo">
+								<a href="{{url('/')}}" class="logo">
 									<img src="./img/logo.png" alt="">
 								</a>
 							</div>
@@ -36,8 +36,11 @@
 								<form>
 									<select class="input-select">
 										<option value="0">All Categories</option>
-										<option value="1">Category 01</option>
-										<option value="1">Category 02</option>
+										@foreach($categories as $category)
+										{
+											<option value="1">{{$category->name}}</option>
+										}
+										@endforeach
 									</select>
 									<input class="input" placeholder="Search here">
 									<button class="search-btn">Search</button>
@@ -60,39 +63,47 @@
 								<!-- /Wishlist -->
 
 								<!-- Cart -->
+								<?php
+
+									$cart_array=helper::cardArray();
+									
+								?>
 								<div class="dropdown">
 									<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
 										<i class="fa fa-shopping-cart"></i>
 										<span>Your Cart</span>
-										<div class="qty">3</div>
+										<div class="qty"><?= count($cart_array) ?></div>
 									</a>
 									<div class="cart-dropdown">
 										<div class="cart-list">
+											@foreach($cart_array as $v_add_cart)
+											<?php
+												$images=$v_add_cart['attributes'][0];
+												$images=explode('|',$images);
+												$images=$images[0];
+
+												// $product['image'] = explode('|',$product->image);
+												// $images=$product->image[0];
+											?>
+
 											<div class="product-widget">
 												<div class="product-img">
-													<img src="./img/product01.png" alt="">
+													<img src="{{asset('/image/'.$images)}}" alt="">
 												</div>
 												<div class="product-body">
-													<h3 class="product-name"><a href="#">product name goes here</a></h3>
-													<h4 class="product-price"><span class="qty">1x</span>$980.00</h4>
+													<h3 class="product-name"><a href="#">{{$v_add_cart['name']}}</a></h3>
+													<h4 class="product-price"><span class="qty">{{$v_add_cart['quantity']}}</span>&#2547;{{$v_add_cart['price']}}</h4>
 												</div>
 												<button class="delete"><i class="fa fa-close"></i></button>
 											</div>
 
-											<div class="product-widget">
-												<div class="product-img">
-													<img src="./img/product02.png" alt="">
-												</div>
-												<div class="product-body">
-													<h3 class="product-name"><a href="#">product name goes here</a></h3>
-													<h4 class="product-price"><span class="qty">3x</span>$980.00</h4>
-												</div>
-												<button class="delete"><i class="fa fa-close"></i></button>
-											</div>
+											@endforeach
+
+											
 										</div>
 										<div class="cart-summary">
-											<small>3 Item(s) selected</small>
-											<h5>SUBTOTAL: $2940.00</h5>
+											<small><?= count($cart_array) ?> Item(s) selected</small>
+											<h5>SUBTOTAL: &#2547;{{Cart::getTotal()}}</h5>
 										</div>
 										<div class="cart-btns">
 											<a href="#">View Cart</a>
