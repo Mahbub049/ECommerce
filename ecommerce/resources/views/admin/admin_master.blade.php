@@ -189,9 +189,13 @@
  									<span>Account Settings</span>
 								</li>
 								<li><a href="#"><i class="halflings-icon user"></i> Profile</a></li>
+<<<<<<< HEAD
 								<li><a href="{{ url('/') }}"><i class="halflings-icon off"></i> Go to Website</a></li>
 								<li><a href="{{ url('logout') }}"><i class="halflings-icon off"></i> Logout</a></li>
 								
+=======
+								<li><a href="{{ url('logout') }}"><i class="halflings-icon off"></i> Logout</a></li>
+>>>>>>> f814d9fd8e76180f2b419dbd5ad7201a4db7731c
 							</ul>
 						</li>
 						<!-- end: User Dropdown -->
@@ -281,7 +285,11 @@
 						<li><a href="calendar.html"><i class="icon-calendar"></i><span class="hidden-tablet"> Calendar</span></a></li>
 						<li><a href="file-manager.html"><i class="icon-folder-open"></i><span class="hidden-tablet"> File Manager</span></a></li>
 						<li><a href="icon.html"><i class="icon-star"></i><span class="hidden-tablet"> Icons</span></a></li> --}}
+<<<<<<< HEAD
 						<li><a href="{{ url('/admins') }}"><i class="icon-lock"></i><span class="hidden-tablet"> Log Out</span></a></li>
+=======
+						<li><a href="{{ url('/admins') }}"><i class="icon-lock"></i><span class="hidden-tablet"> Login Page</span></a></li>
+>>>>>>> f814d9fd8e76180f2b419dbd5ad7201a4db7731c
 					</ul>
 				</div>
 			</div>

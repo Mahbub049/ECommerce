@@ -26,7 +26,11 @@
             
             ?>
         </p>
+<<<<<<< HEAD
         <h2><i class="halflings-icon edit"></i><span class="break"></span>Add Sub Category</h2>
+=======
+        <h2><i class="halflings-icon edit"></i><span class="break"></span>Add Category</h2>
+>>>>>>> f814d9fd8e76180f2b419dbd5ad7201a4db7731c
 
     </div>
 

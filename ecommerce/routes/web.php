@@ -11,8 +11,11 @@ use App\Http\Controllers\UnitController;
 use App\Http\Controllers\SizeController;
 use App\Http\Controllers\ColorController;
 use App\Http\Controllers\ProductController;
+<<<<<<< HEAD
 use App\Http\Controllers\CartController;
 use Darryldecode\Cart\Cart;
+=======
+>>>>>>> f814d9fd8e76180f2b419dbd5ad7201a4db7731c
 
 
 /*

@@ -8,7 +8,10 @@ use App\Models\Unit;
 use App\Models\Size;
 use App\Models\Color;
 use App\Models\Product;
+<<<<<<< HEAD
 use Darryldecode\Cart\Cart;
+=======
+>>>>>>> f814d9fd8e76180f2b419dbd5ad7201a4db7731c
 
 use Illuminate\Http\Request;
 

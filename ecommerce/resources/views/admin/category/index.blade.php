@@ -1,5 +1,9 @@
 @extends('admin.admin_master')
+<<<<<<< HEAD
 @section('admin_content')
+=======
+@section('admin_content');
+>>>>>>> f814d9fd8e76180f2b419dbd5ad7201a4db7731c
 
 <div class="row-fluid sortable">		
     <div class="box span12">
@@ -17,8 +21,13 @@
                 ?>
             </p>
 
+<<<<<<< HEAD
             <h2 ><i class="halflings-icon user"></i><span class="break"></span>Members</h2>
             <div class="box-icon" >
+=======
+            <h2><i class="halflings-icon user"></i><span class="break"></span>Members</h2>
+            <div class="box-icon">
+>>>>>>> f814d9fd8e76180f2b419dbd5ad7201a4db7731c
                 <a href="#" class="btn-setting"><i class="halflings-icon wrench"></i></a>
                 <a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
                 <a href="#" class="btn-close"><i class="halflings-icon remove"></i></a>
