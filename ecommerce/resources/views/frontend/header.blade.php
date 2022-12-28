@@ -3,12 +3,19 @@
 				<div class="container">
 					<ul class="header-links pull-left">
 						<li><a href="#"><i class="fa fa-phone"></i> +021-95-51-84</a></li>
-						<li><a href="#"><i class="fa fa-envelope-o"></i> email@email.com</a></li>
-						<li><a href="#"><i class="fa fa-map-marker"></i> 1734 Stonecoal Road</a></li>
+						<li><a href="#"><i class="fa fa-envelope-o"></i> genuity@gmail.com</a></li>
+						<li><a href="#"><i class="fa fa-map-marker"></i> Mirpur 11, Dhaka</a></li>
 					</ul>
 					<ul class="header-links pull-right">
 						<li><a href="#">&#2547; BDT</a></li>
-						<li><a href="#"><i class="fa fa-user-o"></i> My Account</a></li>
+						@php
+							$customer_id=Session::get('id');
+						@endphp
+						@if($customer_id!=Null)
+							<li><a href="{{ url('/customer-logout') }}"><i class="fa fa-user-o"></i> Logout</a></li>
+						@else
+							<li><a href="{{ url('/login-check') }}"><i class="fa fa-user-o"></i> Login</a></li>
+						@endif
 					</ul>
 				</div>
 			</div>
@@ -33,16 +40,16 @@
 						<!-- SEARCH BAR -->
 						<div class="col-md-6">
 							<div class="header-search">
-								<form>
-									<select class="input-select">
-										<option value="0">All Categories</option>
+								<form action="{{ url('/search') }}" method="GET">
+									<select class="input-select" name="category">
+										<option value="ALL" {{ request('category')=="ALL" ? 'selected':'' }}>All Categories</option>
 										@foreach($categories as $category)
 										{
-											<option value="1">{{$category->name}}</option>
+											<option value="{{ $category->id }}" {{ request('category') == $category->id ? 'selected':'' }}>{{$category->name}}</option>
 										}
 										@endforeach
 									</select>
-									<input class="input" placeholder="Search here">
+									<input class="input" name="product" placeholder="Search here" value="{{ request('product') }}">
 									<button class="search-btn">Search</button>
 								</form>
 							</div>
@@ -63,51 +70,51 @@
 								<!-- /Wishlist -->
 
 								<!-- Cart -->
-								<?php
-
-									$cart_array=helper::cardArray();
-									
-								?>
+								@php
+									$cart_array=cardArray();
+								@endphp
 								<div class="dropdown">
 									<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
 										<i class="fa fa-shopping-cart"></i>
 										<span>Your Cart</span>
-										<div class="qty"><?= count($cart_array) ?></div>
+										<div class="qty"><?=count($cart_array) ?></div>
 									</a>
 									<div class="cart-dropdown">
 										<div class="cart-list">
-											@foreach($cart_array as $v_add_cart)
-											<?php
-												$images=$v_add_cart['attributes'][0];
-												$images=explode('|',$images);
-												$images=$images[0];
-
-												// $product['image'] = explode('|',$product->image);
-												// $images=$product->image[0];
-											?>
-
+											
+											
+											@foreach ($cart_array as $v_add_cart)
+												@php
+													$images=$v_add_cart['attributes'][0];
+													$images=explode('|',$images);
+													$images=$images[0];
+												@endphp
 											<div class="product-widget">
 												<div class="product-img">
-													<img src="{{asset('/image/'.$images)}}" alt="">
+													<img src="{{ asset('/image/'.$images) }}" alt="">
 												</div>
 												<div class="product-body">
-													<h3 class="product-name"><a href="#">{{$v_add_cart['name']}}</a></h3>
-													<h4 class="product-price"><span class="qty">{{$v_add_cart['quantity']}}</span>&#2547;{{$v_add_cart['price']}}</h4>
+													<h3 class="product-name"><a href="#">{{ $v_add_cart['name'] }}</a></h3>
+													<h4 class="product-price"><span class="qty">{{ $v_add_cart['quantity'] }}</span>&#2547 {{ $v_add_cart['price'] }}</h4>
 												</div>
-												<button class="delete"><i class="fa fa-close"></i></button>
+												<a class="delete" href="{{ url('/delete-cart/'.$v_add_cart['id']) }}"><i class="fa fa-close"></i></a>
 											</div>
-
 											@endforeach
-
-											
 										</div>
 										<div class="cart-summary">
-											<small><?= count($cart_array) ?> Item(s) selected</small>
-											<h5>SUBTOTAL: &#2547;{{Cart::getTotal()}}</h5>
+											<small><?=count($cart_array) ?> Item(s) selected</small>
+											<h5>SUBTOTAL: &#2547 {{ Cart::getTotal() }}</h5>
 										</div>
 										<div class="cart-btns">
-											<a href="#">View Cart</a>
-											<a href="#">Checkout  <i class="fa fa-arrow-circle-right"></i></a>
+											@php
+												$customer_id=Session::get('id');
+											@endphp
+											@if($customer_id!=Null)
+											<a style="width: 100%; background-color: #d10024" href="{{ url('/checkout') }}">Checkout  <i class="fa fa-arrow-circle-right"></i></a>
+											@else
+											<a style="width: 100%; background-color: #d10024" href="{{ url('/login-check') }}">Checkout  <i class="fa fa-arrow-circle-right"></i></a>
+											@endif
+											{{-- <a href="{{ url('/checkout') }}">Checkout  <i class="fa fa-arrow-circle-right"></i></a> --}}
 										</div>
 									</div>
 								</div>

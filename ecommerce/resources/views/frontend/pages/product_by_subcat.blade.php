@@ -86,17 +86,46 @@ use App\Models\Product;
 						<div class="aside">
 							<h3 class="aside-title">Top selling</h3>
 							<div class="product-widget">
-								<div class="product-img">
-									<img src="./img/product01.png" alt="">
-								</div>
+								@foreach ($topProducts as $topProduct)
+								<?php
+									    $topProduct['image'] = explode('|',$topProduct->image);
+										$images=$topProduct->image[0];
+								?>
+								<div class="product">
 								<div class="product-body">
-									<p class="product-category">Category</p>
-									<h3 class="product-name"><a href="#">product name goes here</a></h3>
-									<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
+									<div class="product-img">
+										<a href="{{url('/view-details'.$topProduct->id)}}">
+										<img src="{{ asset('/image/'.$images) }}" alt="" style="width: 90px; height: 90px;"></a>
+									</div>
+									<p class="product-category">{{$topProduct->category->name}}</p>
+									<h3 class="product-name"><a href="{{url('/view-details'.$topProduct->id)}}">{{$topProduct->name}}</a></h3>
+									<h4 class="product-price">&#2547;{{$topProduct->price}} <del class="product-old-price">&#2547;{{$topProduct->price}}</del></h4>
 								</div>
+							</div>
+								@endforeach
 							</div>
 						</div>
 						<!-- /aside Widget -->
+						
+						{{-- <!-- aside Widget -->
+						<div class="aside">
+							<h3 class="aside-title">Top selling</h3>
+							<div class="product-widget">
+								<div class="product-img">
+									<img src="./img/product01.png" alt="">
+								</div>
+
+								@foreach ($topProducts as $topProduct)
+								<div class="product-body">
+									<p class="product-category">{{$topProduct->category->name}}</p>
+									<h3 class="product-name"><a href="{{url('/view-details'.$topProduct->id)}}">{{$topProduct->name}}</a></h3>
+									<h4 class="product-price">&#2547;{{$topProduct->price}} <del class="product-old-price">&#2547;{{$topProduct->price}}</del></h4>
+								</div>
+								@endforeach
+
+							</div>
+						</div>
+						<!-- /aside Widget --> --}}
 					</div>
 					<!-- /ASIDE -->
 
@@ -138,6 +167,7 @@ use App\Models\Product;
 					        ?>
 							<div class="col-md-4 col-xs-6">
 								<div class="product">
+								<a href="{{url('/view-details'.$product->id)}}">
 									<div class="product-img">
 										<img src="{{ asset('/image/'.$images) }}" alt="">
 										<div class="product-label">
@@ -145,10 +175,11 @@ use App\Models\Product;
 											<span class="new">NEW</span>
 										</div>
 									</div>
+								</a>
 									<div class="product-body">
-                                    <p class="product-category"> <a href="{{url('/view_product/'.$product->id)}}">{{$product->category->name}}</a> </p>
-								    <h3 class="product-name"><a href="{{url('/view_product/'.$product->id)}}">{{$product->name}}</a></h3>
-								    <h4 class="product-price"><a href="{{url('/view_product/'.$product->id)}}">&#2547;{{$product->price}} <del class="product-old-price">&#2547;{{$product->price}} </del></a> </h4>
+                                    <p class="product-category"> <a href="{{url('/view-details'.$product->id)}}">{{$product->category->name}}</a> </p>
+								    <h3 class="product-name"><a href="{{url('/view-details'.$product->id)}}">{{$product->name}}</a></h3>
+								    <h4 class="product-price"><a href="{{url('/view-details'.$product->id)}}">&#2547;{{$product->price}} <del class="product-old-price">&#2547;{{$product->price}} </del></a> </h4>
 										<div class="product-rating">
 											<i class="fa fa-star"></i>
 											<i class="fa fa-star"></i>
@@ -160,11 +191,24 @@ use App\Models\Product;
 											<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
 											<button class="add-to-compare"><i class="fa fa-exchange"></i><span class="tooltipp">add to compare</span></button>
 											<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
+											<form action="{{url('add-to-cart')}}" method="post">
+												@csrf
+											<div class="qty-label">
+												<div class="input-number">
+													<input type="number" name="quantity" value="{{ $product->quantity }}">
+													<span class="qty-up">+</span>
+													<span class="qty-down">-</span>
+												</div></div>
 										</div>
 									</div>
-									<div class="add-to-cart">
-										<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
-									</div>
+									{{-- <form action="{{url('add-to-cart')}}" method="post">
+												@csrf --}}
+											<div class="add-to-cart">
+												{{-- <input type="hidden" name="quantity" value="1"> --}}
+												<input type="hidden" name="id" value="{{$product->id}}">
+												<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+											</div>
+											</form>
 								</div>
 							</div>
                             @endforeach

@@ -34,7 +34,6 @@ class Product extends Model
     {
     return $this->belongsTo(Color::class,'color_id');
     }
-<<<<<<< HEAD
 
     public static function catProductCount($cat_id)
     {
@@ -53,6 +52,4 @@ class Product extends Model
         $brandCount=Product::where('br_id',$br_id)->where('status',1)->count();
         return $brandCount;
     }
-=======
->>>>>>> f814d9fd8e76180f2b419dbd5ad7201a4db7731c
 }

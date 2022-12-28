@@ -53,7 +53,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</a>
-				<a class="brand" href="index.html"><span>ECommerce</span></a>
+				<a class="brand" href="{{ url('/dashboard') }}"><span>ECommerce</span></a>
 								
 				<!-- start: Header Menu -->
 				<div class="nav-no-collapse header-nav">
@@ -189,13 +189,9 @@
  									<span>Account Settings</span>
 								</li>
 								<li><a href="#"><i class="halflings-icon user"></i> Profile</a></li>
-<<<<<<< HEAD
 								<li><a href="{{ url('/') }}"><i class="halflings-icon off"></i> Go to Website</a></li>
 								<li><a href="{{ url('logout') }}"><i class="halflings-icon off"></i> Logout</a></li>
 								
-=======
-								<li><a href="{{ url('logout') }}"><i class="halflings-icon off"></i> Logout</a></li>
->>>>>>> f814d9fd8e76180f2b419dbd5ad7201a4db7731c
 							</ul>
 						</li>
 						<!-- end: User Dropdown -->
@@ -277,19 +273,15 @@
 								{{-- <li><a class="submenu" href="submenu3.html"><i class="icon-file-alt"></i><span class="hidden-tablet"> Sub Menu 3</span></a></li> --}}
 							</ul>	
 						</li>
-						{{-- <li><a href="form.html"><i class="icon-edit"></i><span class="hidden-tablet"> Forms</span></a></li>
-						<li><a href="chart.html"><i class="icon-list-alt"></i><span class="hidden-tablet"> Charts</span></a></li>
+						<li><a href="{{url('/manage-order')}}"><i class="icon-edit"></i><span class="hidden-tablet"> Orders</span></a></li>
+						{{-- <li><a href="chart.html"><i class="icon-list-alt"></i><span class="hidden-tablet"> Charts</span></a></li>
 						<li><a href="typography.html"><i class="icon-font"></i><span class="hidden-tablet"> Typography</span></a></li>
 						<li><a href="gallery.html"><i class="icon-picture"></i><span class="hidden-tablet"> Gallery</span></a></li>
 						<li><a href="table.html"><i class="icon-align-justify"></i><span class="hidden-tablet"> Tables</span></a></li>
 						<li><a href="calendar.html"><i class="icon-calendar"></i><span class="hidden-tablet"> Calendar</span></a></li>
 						<li><a href="file-manager.html"><i class="icon-folder-open"></i><span class="hidden-tablet"> File Manager</span></a></li>
 						<li><a href="icon.html"><i class="icon-star"></i><span class="hidden-tablet"> Icons</span></a></li> --}}
-<<<<<<< HEAD
-						<li><a href="{{ url('/admins') }}"><i class="icon-lock"></i><span class="hidden-tablet"> Log Out</span></a></li>
-=======
-						<li><a href="{{ url('/admins') }}"><i class="icon-lock"></i><span class="hidden-tablet"> Login Page</span></a></li>
->>>>>>> f814d9fd8e76180f2b419dbd5ad7201a4db7731c
+						<li><a href="{{ url('/admins') }}"><i class="icon-lock"></i><span class="hidden-tablet"> Log Out</span></a></li> 
 					</ul>
 				</div>
 			</div>
@@ -345,7 +337,7 @@
 	<footer>
 
 		<p>
-			<span style="text-align:left;float:left">&copy; 2013 <a href="http://jiji262.github.io/Bootstrap_Metro_Dashboard/" alt="Bootstrap_Metro_Dashboard">Bootstrap Metro Dashboard</a></span>
+			<span style="text-align:left;float:left">&copy; 2022 <a href="" alt="Bootstrap_Metro_Dashboard">ECommerce</a></span>
 			
 		</p>
 

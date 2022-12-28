@@ -1,9 +1,5 @@
 @extends('admin.admin_master')
-<<<<<<< HEAD
 @section('admin_content')
-=======
-@section('admin_content');
->>>>>>> f814d9fd8e76180f2b419dbd5ad7201a4db7731c
 
 <div class="row-fluid sortable">		
     <div class="box span12">
