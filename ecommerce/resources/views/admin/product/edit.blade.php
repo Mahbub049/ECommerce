@@ -89,7 +89,7 @@
                     <label class="control-label">Select Unit</label>
                     <div class="control">
                         <select name="unit" style="margin-left: 20px;">
-                            <option>Select SubCategory</option>
+                            <option>Select Unit</option>
                             @foreach($units as $unit)
                             <option value="{{$unit->id}}">{{$unit->name}}</option>
                             @endforeach

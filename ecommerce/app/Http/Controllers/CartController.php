@@ -3,8 +3,20 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Category;
+use App\Models\SubCategory;
+use App\Models\Brand;
+use App\Models\Unit;
+use App\Models\Size;
+use App\Models\Color;
 use App\Models\Product;
-use Darryldecode\Cart\Cart;
+use Cart;
+use DB;
+use App\Http\Requests;
+use Session;
+use Illuminate\Support\Facades\Redirect;
+session_start();
+// use Darryldecode\Cart\Cart;
 use App\Helpers\helper;
 
 class CartController extends Controller
@@ -19,12 +31,18 @@ class CartController extends Controller
         $data['id']=$products->id;
         $data['name']=$products->name;
         $data['price']=$products->price;
-        $data['attribute']=[$products->image];
+        $data['attributes']=array($products->image);
 
-        \Cart::add( $data);
-        helper::cardArray();
+        // \Cart::add( $data);
+        Cart::add( $data);
+        cardArray();
         
         return redirect()->back();
         
+    }
+
+    public function delete($id){
+        Cart::remove($id);
+        return redirect()->back();
     }
 }

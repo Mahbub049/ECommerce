@@ -8,10 +8,7 @@ use App\Models\Unit;
 use App\Models\Size;
 use App\Models\Color;
 use App\Models\Product;
-<<<<<<< HEAD
 use Darryldecode\Cart\Cart;
-=======
->>>>>>> f814d9fd8e76180f2b419dbd5ad7201a4db7731c
 
 use Illuminate\Http\Request;
 
@@ -136,6 +133,7 @@ class ProductController extends Controller
     {
         $size=explode(',',$request->size);
         $color=explode(',',$request->color);
+        
         $update=$product->code=$request->code;
         $product->name=$request->name;
         $product->cat_id=$request->category;
@@ -146,10 +144,27 @@ class ProductController extends Controller
         $product->color_id=(int)Json_encode($color);
         $product->description=$request->description;
         $product->price=$request->price;
+        $images=array();
+        if($files=$request->file('file')){
+            $i = 0;
+            foreach($files as $file){
+                $name = $file->getClientOriginalName();
+                $fileNameExtract=explode('.',$name);
+                $fileName=$fileNameExtract[0];
+                $fileName.=time();
+                $fileName.=$i;
+                $fileName.='.';
+                $fileName.=$fileNameExtract[1];
+                $file->move('image',$fileName);
+                $image[]=$fileName;
+                $i++;
+            }
+            $product['image']=implode("|",$image);
         $product->save();
         if($update)
             return redirect('/products')->with('message','Product updated successfully');
     }
+}
 
     /**
      * Remove the specified resource from storage.
